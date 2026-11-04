@@ -31,6 +31,41 @@ You will:
 
 **Important:** Nothing appears on the screen while you type a Linux password. This is normal. Type the password and press Enter.
 
+### Forgotten your WSL password?
+
+Your Ubuntu/WSL password is separate from your Windows and GitHub passwords. Reset it as follows; your project files remain in place.
+
+1. In your usual **Ubuntu terminal**, run `whoami` and note your Linux username. This does not require your password.
+2. Open **Windows PowerShell** (not the Ubuntu terminal) and list your distributions:
+
+   ```powershell
+   wsl --list --verbose
+   ```
+
+3. Start your project’s distribution as root. Replace `Ubuntu` with its exact name from the list, such as `Ubuntu-24.04`:
+
+   ```powershell
+   wsl --distribution Ubuntu --user root
+   ```
+
+4. You are now in a Linux root shell. Replace `YOUR-LINUX-USERNAME` with the username from step 1 and run:
+
+   ```bash
+   passwd YOUR-LINUX-USERNAME
+   ```
+
+5. Enter your new password twice. Nothing appears while you type—not even dots. Wait for `password updated successfully`.
+6. Run `exit` to leave the root shell. Return to your usual Ubuntu terminal and check the new password:
+
+   ```bash
+   sudo -k
+   sudo whoami
+   ```
+
+   Enter the new password when prompted. The command should print `root`. Continue the project from your usual user account.
+
+See [Microsoft’s WSL password-reset instructions](https://learn.microsoft.com/en-us/windows/wsl/setup/environment#reset-your-linux-password).
+
 ## Part 2: Create a GitHub Account
 
 If you do not already have a GitHub account, create one at [GitHub](https://github.com/).
@@ -64,7 +99,7 @@ https://github.com/YOUR-USERNAME/Baby-Name-App-Project-Files.git
 
 ## Part 5: Clone Your Repository
 
-Open Ubuntu. First, make sure Git and Python are installed:
+Open Ubuntu. If you cannot remember the password requested by `sudo`, follow [Forgotten your WSL password?](#forgotten-your-wsl-password) above. First, make sure Git and Python are installed:
 
 ```bash
 sudo apt update
