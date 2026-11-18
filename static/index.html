@@ -157,6 +157,13 @@
         
         <!-- Highcharts for histograms -->
     	<script src="https://code.highcharts.com/highcharts.js"></script>
+        <script>
+            if (typeof Highcharts === 'undefined') {
+                const fallback = document.createElement('script');
+                fallback.src = 'https://cdn.jsdelivr.net/npm/highcharts@12.4.0/highcharts.js';
+                document.head.append(fallback);
+            }
+        </script>
 
         
     </body>
