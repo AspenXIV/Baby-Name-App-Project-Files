@@ -43,7 +43,7 @@ def get_name_popularity():
     
     # Extract year and rank in year for the given name-sex combination
     name_subset = babynames[
-        (babynames['name'].str.lower() == (name_submitted or '').lower()) &
+        (lowercase_names == (name_submitted or '').lower()) &
         (babynames['sex'] == sex_submitted)
     ]
     name_years = name_subset['year'].tolist()
@@ -90,4 +90,5 @@ babynames = pd.read_csv(
 #Calculate rank in year by grouping babynames by 'year' and then 'sex'
 #Then calculate the rank() of 'count' where ascending=False
 babynames['rank_in_year'] = babynames.groupby(['year', 'sex'])['count'].rank(ascending=False)
+lowercase_names = babynames['name'].str.lower()
 
